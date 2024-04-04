@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from dotenv import dotenv_values
 from azure.cosmos.aio import CosmosClient
 from azure.cosmos import PartitionKey, exceptions
+from routes.user import router as user_router
 
 config = dotenv_values(".env")
 app = FastAPI()
@@ -25,10 +26,12 @@ async def get_or_create_db(db_name):
     
 async def get_or_create_container(container_name):
     try:        
-        app.todo_items_container = app.database.get_container_client(container_name)
-        return await app.todo_items_container.read()   
+        app.user_items_container = app.database.get_container_client(container_name)
+        return await app.user_items_container.read()   
     except exceptions.CosmosResourceNotFoundError:
         print("Creating container with id as partition key")
         return await app.database.create_container(id=container_name, partition_key=PartitionKey(path="/id"))
     except exceptions.CosmosHttpResponseError:
         raise
+
+app.include_router(user_router, tags=['users'],prefix="/users")
