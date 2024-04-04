@@ -12,9 +12,9 @@ CONTAINER_NAME = "Users"
 
 @app.on_event("startup")
 async def startup_db_client():
-  app.cosmos_client = CosmosClient(config["AZURE_COSMOS_URI"], credential = config["AZURE_COSMOS_KEY"])
-  await get_or_create_db(DATABASE_NAME)
-  await get_or_create_container(CONTAINER_NAME)
+    app.cosmos_client = CosmosClient(config["AZURE_COSMOS_URI"], credential = config["AZURE_COSMOS_KEY"])
+    await get_or_create_db(DATABASE_NAME)
+    await get_or_create_container(CONTAINER_NAME)
 
 async def get_or_create_db(db_name):
     try:
