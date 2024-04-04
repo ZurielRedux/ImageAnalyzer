@@ -12,3 +12,4 @@ sqlmodel
 python-dotenv
 azure-cosmos
 aiohttp
+email-validator
