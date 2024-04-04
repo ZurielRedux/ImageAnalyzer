@@ -1,3 +1,4 @@
+import azure.functions as func
 from fastapi import FastAPI
 from dotenv import dotenv_values
 from azure.cosmos.aio import CosmosClient
@@ -35,3 +36,16 @@ async def get_or_create_container(container_name):
         raise
 
 app.include_router(user_router, tags=['users'],prefix="/users")
+
+def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
+    """
+    Azure function entry point.
+    All web requests are handled by FastAPI.
+    Args:
+        req (func.HttpRequest): Request
+        context (func.Context): Azure Function Context
+
+    Returns:
+        func.HttpResponse: HTTP Response
+    """
+    return func.AsgiMiddleware(app).handle(req, context)

@@ -9,3 +9,4 @@ router = APIRouter()
 async def list_users(request: Request):
     users = [user async for user in request.app.user_items_container.read_all_items()]
     return users
+
