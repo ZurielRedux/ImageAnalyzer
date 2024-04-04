@@ -3,5 +3,5 @@ from typing import Optional
 
 class User(BaseModel):
     id : str 
-    name : str
+    username : str
     email : str
