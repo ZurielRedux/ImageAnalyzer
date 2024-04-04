@@ -4,3 +4,11 @@
 
 azure-functions
 fastapi
+sqlalchemy
+pyodbc
+uvicorn[standard]
+pydantic
+sqlmodel
+python-dotenv
+azure-cosmos
+aiohttp
