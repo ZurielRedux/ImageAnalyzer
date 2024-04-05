@@ -9,7 +9,6 @@ from routes.process import router as process_router
 
 import logging
 
-
 config = dotenv_values(".env")
 app = FastAPI()
 
@@ -50,12 +49,9 @@ async def get_or_create_container(container_name):
     except exceptions.CosmosHttpResponseError:
         raise
 
-@app.post("/file")
-async def create_upload_file(file: UploadFile = File(...)):
-    logging.info(f'Entered /file route for {file.filename}')
-
 app.include_router(user_router, tags=['users'],prefix="/users")
-#app.include_router(process_router, tags=['process'],prefix="/process")
+app.include_router(process_router, tags=['process'],prefix="/process")
+
 # def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
 #     """
 #     Azure function entry point.
