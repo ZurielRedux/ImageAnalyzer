@@ -13,3 +13,5 @@ python-dotenv
 azure-cosmos
 aiohttp
 email-validator
+azure-storage-blob
+python-multipart

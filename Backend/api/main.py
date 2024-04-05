@@ -1,15 +1,30 @@
 import azure.functions as func
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import dotenv_values
 from azure.cosmos.aio import CosmosClient
 from azure.cosmos import PartitionKey, exceptions
 from routes.user import router as user_router
+from routes.process import router as process_router
+
+import logging
+
 
 config = dotenv_values(".env")
 app = FastAPI()
 
 DATABASE_NAME = "Image-Analyzer"
 CONTAINER_NAME = "Users"
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 async def startup_db_client():
@@ -35,17 +50,21 @@ async def get_or_create_container(container_name):
     except exceptions.CosmosHttpResponseError:
         raise
 
+@app.post("/file")
+async def create_upload_file(file: UploadFile = File(...)):
+    logging.info(f'Entered /file route for {file.filename}')
+
 app.include_router(user_router, tags=['users'],prefix="/users")
+#app.include_router(process_router, tags=['process'],prefix="/process")
+# def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
+#     """
+#     Azure function entry point.
+#     All web requests are handled by FastAPI.
+#     Args:
+#         req (func.HttpRequest): Request
+#         context (func.Context): Azure Function Context
 
-def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
-    """
-    Azure function entry point.
-    All web requests are handled by FastAPI.
-    Args:
-        req (func.HttpRequest): Request
-        context (func.Context): Azure Function Context
-
-    Returns:
-        func.HttpResponse: HTTP Response
-    """
-    return func.AsgiMiddleware(app).handle(req, context)
+#     Returns:
+#         func.HttpResponse: HTTP Response
+#     """
+#     return func.AsgiMiddleware(app).handle(req, context)
