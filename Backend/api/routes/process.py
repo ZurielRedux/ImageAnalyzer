@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request, HTTPException, UploadFile, status, File
 from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
 from azure.storage.blob.aio import BlobServiceClient
 from dotenv import dotenv_values
 import logging
@@ -14,6 +15,8 @@ async def create_upload_file(file: UploadFile = File(...)):
     
     azureBlobResponse = await uploadToAzure(file)
     # imageAnalyze = await analyzeImage(file)
+
+    return JSONResponse(status_code=status.HTTP_201_CREATED, content={"message": "File Uploaded and Analyzed"})
 
 async def uploadToAzure(file: UploadFile):
     connect_str = config["AZURE_BLOB_CONNECTION"]
