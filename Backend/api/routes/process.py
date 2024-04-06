@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Request, HTTPException, UploadFile, status, File
 from fastapi.responses import JSONResponse
 from azure.storage.blob.aio import BlobServiceClient
-import aiohttp
 from dotenv import dotenv_values
+import aiohttp
 import logging
 
 config = dotenv_values(".env")
@@ -14,7 +14,7 @@ async def create_upload_file(file: UploadFile = File(...)):
     print(f"Received file: {file.filename}, Content-Type: {file.content_type}")
     
     azureBlobResponse = await uploadToAzure(file)
-    imageAnalyze = await analyzeImage(file)
+    # imageAnalyze = await analyzeImage(file)
 
     return JSONResponse(status_code=status.HTTP_201_CREATED, content={"message": "File Uploaded and Analyzed"})
 
@@ -51,6 +51,7 @@ async def analyzeImage(file: UploadFile):
     async with aiohttp.ClientSession() as session:
         async with session.post(address, headers=headers, params=parameters, data=image_data) as response:
             results = await response.json()
+            print(results)
             if response.status != 200:
                 # Raise an exception for HTTP error statuses
                 response.raise_for_status()

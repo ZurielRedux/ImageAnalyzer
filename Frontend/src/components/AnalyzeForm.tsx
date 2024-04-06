@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 // import { IForm } from "@/ts/interfaces/form";
-import axios from "axios";
+import * as API from "@/util/api";
 
 const AnalyzeForm = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -17,20 +17,12 @@ const AnalyzeForm = () => {
     formData.append("name", file.name);
     formData.append("type", file.type);
 
-    await axios({
-      method: "post",
-      url: "http://localhost:8000/api/v1/process/file",
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        accept: "application/json",
-      },
-    })
-      .then(function (response) {
-        console.log(response, "on success response");
+    await API.processAndAnalyzeImage(formData)
+      .then((response) => {
+        console.log("successfully processed and analyzed", response);
       })
-      .catch(function (error) {
-        console.error("Error processing image", error);
+      .catch((error) => {
+        console.error(`Error processing image`, error);
       });
   };
 

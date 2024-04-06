@@ -1,5 +1,10 @@
 import axios from "axios";
-import { IAnalyzeImagePayload } from "@/ts/interfaces/payload";
 
-export const analyzeImage = (payload: IAnalyzeImagePayload) =>
-  axios.post(`/api/v1/process/file`, payload);
+export const processAndAnalyzeImage = async (formData: FormData) => {
+  const headers = {
+    "Content-Type": "multipart/form-data",
+    accept: "application/json",
+  };
+
+  await axios.post(`/api/v1/process/file`, formData, { headers });
+};
