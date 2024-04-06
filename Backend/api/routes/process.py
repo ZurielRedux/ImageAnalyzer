@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request, HTTPException, UploadFile, status, File
-from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from azure.storage.blob.aio import BlobServiceClient
+import aiohttp
 from dotenv import dotenv_values
 import logging
 
@@ -11,10 +11,10 @@ router = APIRouter()
 @router.post("/file")
 async def create_upload_file(file: UploadFile = File(...)):
     logging.info('Entered /file route')
-    logging.info(f"Received file: {file.filename}, Content-Type: {file.content_type}")
+    print(f"Received file: {file.filename}, Content-Type: {file.content_type}")
     
     azureBlobResponse = await uploadToAzure(file)
-    # imageAnalyze = await analyzeImage(file)
+    imageAnalyze = await analyzeImage(file)
 
     return JSONResponse(status_code=status.HTTP_201_CREATED, content={"message": "File Uploaded and Analyzed"})
 
@@ -34,3 +34,25 @@ async def uploadToAzure(file: UploadFile):
                 return HTTPException(401, "Error uploading file to Blob storage")
     
     return (f"successfully uploaded {file.filename} to Blob storage")
+
+async def analyzeImage(file: UploadFile):
+    subscription_key = config['AZURE_VISION_KEY']
+    address = config['AZURE_VISION_ADDRESS']
+    parameters = {'visualFeatures': 'Description,Color,Objects,Faces', 'language': 'en'}
+    
+    await file.seek(0)  # Reset file pointer to read the file again
+    image_data = await file.read()
+    
+    headers = {
+        'Content-Type': 'application/octet-stream',
+        'Ocp-Apim-Subscription-Key': subscription_key
+    }
+    
+    async with aiohttp.ClientSession() as session:
+        async with session.post(address, headers=headers, params=parameters, data=image_data) as response:
+            results = await response.json()
+            if response.status != 200:
+                # Raise an exception for HTTP error statuses
+                response.raise_for_status()
+    
+            print(f'API responded with: {results}')
