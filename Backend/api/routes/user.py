@@ -6,7 +6,7 @@ from models import UserModel
 
 router = APIRouter()
 
-@router.get("/listall", response_description="List of all Users", response_model=List[UserModel.User])
+@router.get("/listAll", response_description="List of all Users", response_model=List[UserModel.User])
 async def list_users(req: Request):
     users = [user async for user in req.app.user_items_container.read_all_items()]
     return users

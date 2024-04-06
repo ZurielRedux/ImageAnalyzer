@@ -10,7 +10,9 @@ from routes.process import router as process_router
 import logging
 
 config = dotenv_values(".env")
-app = FastAPI()
+app = FastAPI(
+    root_path="/api/v1"
+)
 
 DATABASE_NAME = "Image-Analyzer"
 CONTAINER_NAME = "Users"
