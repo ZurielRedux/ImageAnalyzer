@@ -1,21 +1,27 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-// import { IForm } from "@/ts/interfaces/form";
+import { IForm } from "@/ts/interfaces/form";
 import * as API from "@/util/api";
 
+const initialFormState: IForm = {
+  file: new File([], ""), // Empty File object
+  tags: [], // Empty array for tags
+};
+
 const AnalyzeForm = () => {
-  const [file, setFile] = useState<File | null>(null);
+  const [form, setForm] = useState<IForm>(initialFormState);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!file) {
+    if (!form.file) {
       alert("Error submitting file");
       return;
     }
 
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("name", file.name);
-    formData.append("type", file.type);
+    formData.append("file", form.file);
+    formData.append("name", form.file.name);
+    formData.append("type", form.file.type);
+    formData.append("tags", JSON.stringify(form.tags));
 
     await API.processAndAnalyzeImage(formData)
       .then((response) => {
@@ -34,7 +40,11 @@ const AnalyzeForm = () => {
     }
     const selectedFile = target.files[0];
     console.log(selectedFile, "selected file");
-    setFile(selectedFile);
+    // setFile(selectedFile);
+    setForm((prevForm) => ({
+      ...prevForm,
+      file: selectedFile,
+    }));
   };
 
   return (

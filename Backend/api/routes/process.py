@@ -1,7 +1,8 @@
-from fastapi import APIRouter, Request, HTTPException, UploadFile, status, File
+from fastapi import APIRouter, Request, HTTPException, UploadFile, status, File, Form
 from fastapi.responses import JSONResponse
 from azure.storage.blob.aio import BlobServiceClient
 from dotenv import dotenv_values
+from typing import List
 import aiohttp
 import logging
 
@@ -9,8 +10,9 @@ config = dotenv_values(".env")
 router = APIRouter()
 
 @router.post("/file")
-async def create_upload_file(file: UploadFile = File(...)):
+async def create_upload_file(tags: str = Form(...), file: UploadFile = File(...) ):
     logging.info('Entered /file route')
+    print(f"Tags Array: {tags}")
     print(f"Received file: {file.filename}, Content-Type: {file.content_type}")
     
     azureBlobResponse = await uploadToAzure(file)
