@@ -7,8 +7,8 @@
   flex-direction: row;
   overflow-y: none;
   box-sizing: border-box;
-  background-color: $primary-bg-color;
-  color: white;
+  background-color: $primary-light-bg-color;
+  color: black;
   scrollbar-gutter: stable both-edges;
 
   .outlet-component-container {
