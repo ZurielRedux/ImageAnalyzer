@@ -1,0 +1,35 @@
+$primary-bg-color: #1d2d39;
+$secondary-bg-color: #355065;
+$accent: #43759b;
+
+$root-bg-color: #2f363b;
+$header-bg-color: #181c1c;
+
+// spacing
+$spacingCompact: 2px;
+$spacingSmall: 4px;
+$spacingNormal: 8px;
+$spacingMedium: 16px;
+$spacingLarge: 24px;
+
+// borders
+$base-border-thickness: 1px;
+$base-border-radius: 10px;
+
+// box shadow
+$base-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+
+// font size
+$base-font-size: 1rem;
+$font-size-sm: $base-font-size * 0.75;
+$font-size-md: $base-font-size * 1.25;
+$font-size-lg: $base-font-size * 1.5;
+
+$themes: (
+  light: (
+    primary: #fff,
+  ),
+  dark: (
+    primary: #212121,
+  ),
+);

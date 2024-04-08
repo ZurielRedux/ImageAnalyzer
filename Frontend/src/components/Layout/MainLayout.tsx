@@ -3,12 +3,15 @@ import Navbar from "../Navbar";
 import { MainLayoutProps } from "@/ts/interfaces/layout";
 import { Outlet } from "react-router-dom";
 
+import styles from "@/styles/main-layout.module.scss";
+
 const MainLayout = ({ children }: MainLayoutProps): JSX.Element => {
   return (
-    <div>
+    <div className={styles["main-layout-container"]}>
       <Navbar />
-      <h3>Main Layout</h3>
-      {children || <Outlet />}
+      <div className={styles["outlet-component-container"]}>
+        {children || <Outlet />}
+      </div>
     </div>
   );
 };

@@ -10,10 +10,7 @@ const Navbar = () => {
       <li className={styles["li-item"]} key={link.url}>
         <NavLink
           to={link.url}
-          style={({ isActive }) => ({
-            fontWeight: isActive ? "bold" : "normal",
-          })}
-          className={styles["li-item"]}
+          className={({ isActive }) => (isActive ? styles["active"] : "")}
         >
           {link.title}
         </NavLink>
@@ -23,7 +20,9 @@ const Navbar = () => {
 
   return (
     <div className={styles["navbar-container"]}>
-      <div>Image Analyzer</div>
+      <NavLink className={styles["logo-item"]} to={"/"}>
+        Image Analyzer
+      </NavLink>
       <nav className={styles["navbar-links"]}>
         <ul>{navbarList}</ul>
       </nav>

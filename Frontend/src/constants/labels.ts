@@ -1,11 +1,11 @@
-// type INavbarLinks = {
-//   url: string;
-//   title: string;
-// }[];
+type INavbarLinks = {
+  url: string;
+  title: string;
+}[];
 
-export const navbarLinks = [
+export const navbarLinks: INavbarLinks = [
   {
-    url: "/dashboard",
+    url: "/",
     title: "Home",
   },
   {

@@ -1,5 +1,4 @@
 import { RouteObject, useRoutes } from "react-router-dom";
-// import Home from "./pages/Home";
 import Signin from "@/pages/Signin";
 import AuthLayout from "@/components/Layout/AuthLayout";
 import MainLayout from "@/components/Layout/MainLayout";
@@ -12,7 +11,7 @@ const Router = () => {
       element: <AuthLayout />,
       children: [
         {
-          path: "sigin",
+          path: "/sigin",
           element: <Signin />,
         },
       ],
@@ -20,8 +19,8 @@ const Router = () => {
     {
       element: <MainLayout />,
       children: [
-        { path: "dashboard", element: <Dashboard /> },
-        { path: "analyze", element: <Analyze /> },
+        { path: "/", element: <Dashboard /> },
+        { path: "/analyze", element: <Analyze /> },
       ],
     },
   ];
