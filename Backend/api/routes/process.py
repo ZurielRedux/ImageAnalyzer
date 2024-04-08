@@ -16,7 +16,7 @@ async def create_upload_file(tags: str = Form(...), file: UploadFile = File(...)
     print(f"Received file: {file.filename}, Content-Type: {file.content_type}")
     
     azureBlobResponse = await uploadToAzure(file)
-    # imageAnalyze = await analyzeImage(file)
+    imageAnalyze = await analyzeImage(file)
 
     return JSONResponse(status_code=status.HTTP_201_CREATED, content={"message": "File Uploaded and Analyzed"})
 
@@ -41,7 +41,7 @@ async def uploadToAzure(file: UploadFile):
 async def analyzeImage(file: UploadFile = File(...)):
     subscription_key = config['AZURE_VISION_KEY']
     address = config['AZURE_VISION_ADDRESS']
-    parameters = {'visualFeatures': 'Description,Color,Objects,Faces', 'language': 'en'}
+    parameters = {'visualFeatures': 'Categories,Description,Color,Objects,Faces', 'language': 'en'}
     
     await file.seek(0)  # Reset file pointer to read the file again
     image_data = await file.read()
@@ -54,10 +54,9 @@ async def analyzeImage(file: UploadFile = File(...)):
     async with aiohttp.ClientSession() as session:
         async with session.post(address, headers=headers, params=parameters, data=image_data) as response:
             results = await response.json()
-            # print(results)
             if response.status != 200:
                 # Raise an exception for HTTP error statuses
                 response.raise_for_status()
     
             print(f'API responded with: {results}')
-            return JSONResponse(status_code=status.HTTP_200_OK, content={"message": "File Analyzed. Results: {results}"})
+            return JSONResponse(status_code=status.HTTP_200_OK, content={"message": "File Analyzed", "Results": results})
