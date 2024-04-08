@@ -1,11 +1,12 @@
 import React from "react";
+import Router from "./routes/routes";
+
 import "./App.css";
-// import { useRoutes } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <h3>Main App page</h3>
+      <Router />
     </>
   );
 }

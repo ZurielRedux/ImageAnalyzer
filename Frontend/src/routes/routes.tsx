@@ -3,8 +3,8 @@ import { RouteObject, useRoutes } from "react-router-dom";
 import Signin from "@/pages/Signin";
 import AuthLayout from "@/components/Layout/AuthLayout";
 import MainLayout from "@/components/Layout/MainLayout";
-import App from "@/App";
 import Analyze from "@/pages/Analyze";
+import Dashboard from "@/pages/Dashboard";
 
 const Router = () => {
   const routes: RouteObject[] = [
@@ -12,7 +12,7 @@ const Router = () => {
       element: <AuthLayout />,
       children: [
         {
-          path: "/sigin",
+          path: "sigin",
           element: <Signin />,
         },
       ],
@@ -20,7 +20,7 @@ const Router = () => {
     {
       element: <MainLayout />,
       children: [
-        { path: "dashboard", element: <App /> },
+        { path: "dashboard", element: <Dashboard /> },
         { path: "analyze", element: <Analyze /> },
       ],
     },
