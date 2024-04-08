@@ -12,4 +12,8 @@ export const navbarLinks: INavbarLinks = [
     url: "/analyze",
     title: "Analyze",
   },
+  {
+    url: "/collection",
+    title: "Collection",
+  },
 ];

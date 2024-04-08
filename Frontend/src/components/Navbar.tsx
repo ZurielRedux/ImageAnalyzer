@@ -26,7 +26,6 @@ const Navbar = () => {
       <nav className={styles["navbar-links"]}>
         <ul>{navbarList}</ul>
       </nav>
-      <div>My Account</div>
     </div>
   );
 };
