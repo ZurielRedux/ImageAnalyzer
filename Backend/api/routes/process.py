@@ -37,7 +37,8 @@ async def uploadToAzure(file: UploadFile):
     
     return (f"successfully uploaded {file.filename} to Blob storage")
 
-async def analyzeImage(file: UploadFile):
+@router.post("/analyze")
+async def analyzeImage(file: UploadFile = File(...)):
     subscription_key = config['AZURE_VISION_KEY']
     address = config['AZURE_VISION_ADDRESS']
     parameters = {'visualFeatures': 'Description,Color,Objects,Faces', 'language': 'en'}
@@ -53,9 +54,10 @@ async def analyzeImage(file: UploadFile):
     async with aiohttp.ClientSession() as session:
         async with session.post(address, headers=headers, params=parameters, data=image_data) as response:
             results = await response.json()
-            print(results)
+            # print(results)
             if response.status != 200:
                 # Raise an exception for HTTP error statuses
                 response.raise_for_status()
     
             print(f'API responded with: {results}')
+            return JSONResponse(status_code=status.HTTP_200_OK, content={"message": "File Analyzed. Results: {results}"})
