@@ -1,11 +1,12 @@
 import azure.functions as func
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import dotenv_values
 from azure.cosmos.aio import CosmosClient
 from azure.cosmos import PartitionKey, exceptions
 from routes.user import router as user_router
 from routes.process import router as process_router
+from routes.token import router as token_router
+from dotenv import dotenv_values
 
 config = dotenv_values(".env")
 app = FastAPI(
@@ -51,6 +52,7 @@ async def get_or_create_container(container_name):
 
 app.include_router(user_router, tags=['users'],prefix="/users")
 app.include_router(process_router, tags=['process'],prefix="/process")
+app.include_router(token_router, tags=['token'],prefix="/token")
 
 # def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
 #     """

@@ -16,3 +16,6 @@ class User(BaseModel):
             is_alphanumberic = username.replace(' ', '').isalnum()
             assert is_alphanumberic, f'{info.field_name} must be alphanumeric'
         return username
+    
+class UserInDB(User):
+    hashed_password: str

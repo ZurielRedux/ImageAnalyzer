@@ -15,3 +15,4 @@ aiohttp
 email-validator
 azure-storage-blob
 python-multipart
+passlib[bcrypt]
