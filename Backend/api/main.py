@@ -1,13 +1,11 @@
 import azure.functions as func
-from fastapi import FastAPI, Request, UploadFile, File
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import dotenv_values
 from azure.cosmos.aio import CosmosClient
 from azure.cosmos import PartitionKey, exceptions
 from routes.user import router as user_router
 from routes.process import router as process_router
-
-import logging
 
 config = dotenv_values(".env")
 app = FastAPI(

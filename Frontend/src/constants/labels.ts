@@ -1,4 +1,4 @@
-type INavbarLinks = {
+export type INavbarLinks = {
   url: string;
   title: string;
 }[];

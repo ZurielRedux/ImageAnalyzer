@@ -16,26 +16,3 @@ class User(BaseModel):
             is_alphanumberic = username.replace(' ', '').isalnum()
             assert is_alphanumberic, f'{info.field_name} must be alphanumeric'
         return username
-
-User {
-    id,
-    username,
-    email,
-    created_at,
-    password,
-    profile_pic,
-    collections: {
-        {
-            collection_id: string
-            name: animals,
-            analyzed_images: {
-                {
-                    images: url to blobstorage
-                    analyzed data of the image: {}
-                },
-            }
-            created_on,
-            updated_at,
-        }
-    }
-}

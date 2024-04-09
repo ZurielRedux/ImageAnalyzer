@@ -4,6 +4,7 @@ import AuthLayout from "@/components/Layout/AuthLayout";
 import MainLayout from "@/components/Layout/MainLayout";
 import Analyze from "@/pages/Analyze";
 import Dashboard from "@/pages/Dashboard";
+import Collection from "@/pages/Collection";
 
 const Router = () => {
   const routes: RouteObject[] = [
@@ -21,6 +22,7 @@ const Router = () => {
       children: [
         { path: "/", element: <Dashboard /> },
         { path: "/analyze", element: <Analyze /> },
+        { path: "/collection", element: <Collection /> },
       ],
     },
   ];
