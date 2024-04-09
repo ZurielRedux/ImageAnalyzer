@@ -13,8 +13,10 @@
 
   .logo-item {
     color: inherit;
+    display: block;
     text-decoration: none;
     padding: 24px 0;
+    // margin-bottom: 12px;
     border-bottom: 1px solid $lighter-grey-color;
   }
 
@@ -28,7 +30,7 @@
       list-style-type: none;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 1em;
+      gap: $spacingNormal;
       font-size: 18px;
 
       .li-item {
