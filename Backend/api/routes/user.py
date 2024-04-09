@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Request, status
+from fastapi import APIRouter, Request, status, UploadFile, File
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+from routes.process import uploadToAzure
 from typing import List
 from models import UserModel
 
@@ -16,3 +17,7 @@ async def create_user(req: Request, user: UserModel.User, response_model=UserMod
     user = jsonable_encoder(user)
     new_user = await req.app.user_items_container.create_item(user)
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=new_user)
+
+@router.post("profile-pic")
+async def create_upload_file(file: UploadFile = File(...)):
+    azureBlobResponse = await uploadToAzure(file, "user-image-blob")

@@ -10,20 +10,19 @@ config = dotenv_values(".env")
 router = APIRouter()
 
 @router.post("/file")
-async def create_upload_file(tags: str = Form(...), file: UploadFile = File(...) ):
+async def create_upload_file(user_tags: str = Form(...), file: UploadFile = File(...) ):
     logging.info('Entered /file route')
-    print(f"Tags Array: {tags}")
+    print(f"Tags Array: {user_tags}")
     print(f"Received file: {file.filename}, Content-Type: {file.content_type}")
     
-    azureBlobResponse = await uploadToAzure(file)
+    azureBlobResponse = await uploadToAzure(file, "image-blob")
     imageAnalyze = await analyzeImage(file)
 
     return JSONResponse(status_code=status.HTTP_201_CREATED, content={"message": "File Uploaded and Analyzed"})
 
-async def uploadToAzure(file: UploadFile):
+async def uploadToAzure(file: UploadFile, container_name: str):
     connect_str = config["AZURE_BLOB_CONNECTION"]
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
-    container_name = "image-blob"
 
     async with blob_service_client:
             container_client = blob_service_client.get_container_client(container_name)

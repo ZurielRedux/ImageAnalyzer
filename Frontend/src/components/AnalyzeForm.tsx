@@ -21,7 +21,7 @@ const AnalyzeForm = () => {
     formData.append("file", form.file);
     formData.append("name", form.file.name);
     formData.append("type", form.file.type);
-    formData.append("tags", JSON.stringify(form.tags));
+    formData.append("user_tags", JSON.stringify(form.tags));
 
     await API.processAndAnalyzeImage(formData)
       .then((response) => {
