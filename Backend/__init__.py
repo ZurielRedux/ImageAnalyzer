@@ -4,8 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import dotenv_values
 from azure.cosmos.aio import CosmosClient
 from azure.cosmos import PartitionKey, exceptions
-from routes.user import router as user_router
-from routes.process import router as process_router
+from .routers.user import user_router
+from .routers.process import process_router
 
 config = dotenv_values(".env")
 app = FastAPI(
@@ -24,6 +24,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(user_router, tags=['users'],prefix="/users")
+app.include_router(process_router, tags=['process'],prefix="/process")
 
 @app.on_event("startup")
 async def startup_db_client():
@@ -48,19 +51,3 @@ async def get_or_create_container(container_name):
         return await app.database.create_container(id=container_name, partition_key=PartitionKey(path="/id"))
     except exceptions.CosmosHttpResponseError:
         raise
-
-app.include_router(user_router, tags=['users'],prefix="/users")
-app.include_router(process_router, tags=['process'],prefix="/process")
-
-# def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
-#     """
-#     Azure function entry point.
-#     All web requests are handled by FastAPI.
-#     Args:
-#         req (func.HttpRequest): Request
-#         context (func.Context): Azure Function Context
-
-#     Returns:
-#         func.HttpResponse: HTTP Response
-#     """
-#     return func.AsgiMiddleware(app).handle(req, context)
