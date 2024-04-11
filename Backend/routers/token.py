@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Request, status, UploadFile, File, Depends, HTTPException
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from routes.process import uploadToAzure
+from .process import uploadToAzure
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from typing import List, Annotated
 from passlib.context import CryptContext
 from models import UserModel
 
-router = APIRouter()
+token_router = APIRouter()
 
 def fake_hash_password(password: str):
   return "fakehashed" + password

@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from azure.cosmos.aio import CosmosClient
 from azure.cosmos import PartitionKey, exceptions
 from .routers.user import user_router
-from .routes.token import router as token_router
+from .routes.token import token_router
 from .routers.process import process_router
 from dotenv import dotenv_values
 
