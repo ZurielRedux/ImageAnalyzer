@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
+// const isProduction = (process.env.NODE_ENV = "production");
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -15,7 +17,9 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://image-analyzer-func-app.azurewebsites.net/",
+        target: "http://localhost:8000/",
+        // azure func url
+        // target: "https://image-analyzer-func-app.azurewebsites.net/",
         changeOrigin: true,
         secure: false,
         ws: true,
