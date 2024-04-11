@@ -1,5 +1,6 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { IForm } from "@/ts/interfaces/form";
+import axios from "axios";
 import * as API from "@/util/api";
 
 const initialFormState: IForm = {
@@ -9,6 +10,16 @@ const initialFormState: IForm = {
 
 const AnalyzeForm = () => {
   const [form, setForm] = useState<IForm>(initialFormState);
+
+  const handleClick = async () => {
+    await axios
+      .get(
+        `https://image-analyzer-func-app.azurewebsites.net/api/v1/users/listAll`
+      )
+      .then((response) => {
+        console.log(response, "response");
+      });
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -64,6 +75,7 @@ const AnalyzeForm = () => {
         ></input>
         <button type="submit">upload image</button>
       </form>
+      <button onClick={handleClick}> users list all</button>
     </div>
   );
 };

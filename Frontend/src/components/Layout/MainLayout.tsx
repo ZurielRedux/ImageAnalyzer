@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "../Navbar";
 import { MainLayoutProps } from "@/ts/interfaces/layout";
 import { Outlet } from "react-router-dom";
