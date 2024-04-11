@@ -1,4 +1,3 @@
-import React from "react";
 import AnalyzeForm from "@/components/AnalyzeForm";
 
 const Analyze = () => {
