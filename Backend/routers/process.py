@@ -2,15 +2,14 @@ from fastapi import APIRouter, Request, HTTPException, UploadFile, status, File,
 from fastapi.responses import JSONResponse
 from azure.storage.blob.aio import BlobServiceClient
 from dotenv import dotenv_values
-from typing import List
 import aiohttp
 import logging
 
 config = dotenv_values(".env")
-router = APIRouter()
+process_router = APIRouter()
 
-@router.post("/file")
-async def create_upload_file(user_tags: str = Form(...), file: UploadFile = File(...) ):
+@process_router.post("/file")
+async def create_upload_file(user_tags: str = Form(None), file: UploadFile = File(...) ):
     logging.info('Entered /file route')
     print(f"Tags Array: {user_tags}")
     print(f"Received file: {file.filename}, Content-Type: {file.content_type}")
@@ -36,7 +35,7 @@ async def uploadToAzure(file: UploadFile, container_name: str):
     
     return (f"successfully uploaded {file.filename} to Blob storage")
 
-@router.post("/analyze")
+@process_router.post("/analyze")
 async def analyzeImage(file: UploadFile = File(...)):
     subscription_key = config['AZURE_VISION_KEY']
     address = config['AZURE_VISION_ADDRESS']
