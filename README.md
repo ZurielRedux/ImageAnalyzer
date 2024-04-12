@@ -1,10 +1,17 @@
 # Imjür Analyzer
 
-To build azure functionapp
-`func azure functionapp image-analyzer-func-app`
+## Build
+
+To build azure function app
+`func azure functionapp publish image-analyzer-func-app`
+
+To build front-end
+`npm run build`
+
+## URLs
 
 Azure Static Website Blob:
 https://imageanalyzerblob.z13.web.core.windows.net/
 
-Azure function app url:
-https://image-analyzer-func-app.azurewebsites.net/api/v1/
+Azure Function App Url:
+https://image-analyzer-func-app.azurewebsites.net/

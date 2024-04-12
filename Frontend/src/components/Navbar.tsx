@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <div className={styles["navbar-container"]}>
       <NavLink className={styles["logo-item"]} to={"/"}>
-        Image Analyzer
+        Imjür Analyzer
       </NavLink>
       <nav className={styles["navbar-links"]}>
         <ul>{navbarList}</ul>
