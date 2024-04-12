@@ -2,10 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-// const isProduction = (process.env.NODE_ENV = "production");
-
-// https://vitejs.dev/config/
-export default defineConfig({
+const defaultConfig = {
   plugins: [react()],
   resolve: {
     alias: {
@@ -14,16 +11,28 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "./src/components"),
     },
   },
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:8000/",
-        // azure func url
-        // target: "https://image-analyzer-func-app.azurewebsites.net/",
-        changeOrigin: true,
-        secure: false,
-        ws: true,
+};
+
+// https://vitejs.dev/config/
+export default defineConfig(({ command, mode }) => {
+  if (command === "serve") {
+    const isDev = mode === "development";
+
+    return {
+      ...defaultConfig,
+      server: {
+        proxy: {
+          "/api": {
+            target: isDev
+              ? "http://127.0.0.1:7071"
+              : "https://image-analyzer-func-app.azurewebsites.net",
+            changeOrigin: isDev,
+            secure: !isDev,
+          },
+        },
       },
-    },
-  },
+    };
+  } else {
+    return defaultConfig;
+  }
 });

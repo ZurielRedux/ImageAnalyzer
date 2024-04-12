@@ -32,6 +32,24 @@ const AnalyzeForm = () => {
       });
   };
 
+  const onClick = async () => {
+    if (!form.file) {
+      return;
+    }
+    const formData = new FormData();
+    formData.append("file", form.file);
+    formData.append("name", form.file.name);
+    formData.append("type", form.file.type);
+
+    await API.analyzeImage(formData)
+      .then((response) => {
+        console.log("successfully processed and analyzed", response);
+      })
+      .catch((error) => {
+        console.error(`Error processing image`, error);
+      });
+  };
+
   const handleFileChange = (e: ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     if (!target.files) {
@@ -45,6 +63,10 @@ const AnalyzeForm = () => {
       ...prevForm,
       file: selectedFile,
     }));
+  };
+
+  const getUsers = async () => {
+    return await API.getUsers();
   };
 
   return (
@@ -64,6 +86,12 @@ const AnalyzeForm = () => {
         ></input>
         <button type="submit">upload image</button>
       </form>
+      <button onClick={onClick} type="submit">
+        analyze image
+      </button>
+      <button onClick={getUsers} type="submit">
+        get users route
+      </button>
     </div>
   );
 };

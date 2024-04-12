@@ -8,7 +8,12 @@ import logging
 config = dotenv_values(".env")
 process_router = APIRouter()
 
-@process_router.post("/file")
+@process_router.put("/test")
+async def test(req: Request):
+    print(req, 'Request on process_router /test')
+    return JSONResponse(status_code=status.HTTP_200_OK, content={"message": "OK Test"})
+
+@process_router.put("/file")
 async def create_upload_file(user_tags: str = Form(None), file: UploadFile = File(...) ):
     logging.info('Entered /file route')
     print(f"Tags Array: {user_tags}")
@@ -35,7 +40,7 @@ async def uploadToAzure(file: UploadFile, container_name: str):
     
     return (f"successfully uploaded {file.filename} to Blob storage")
 
-@process_router.post("/analyze")
+@process_router.put("/analyze")
 async def analyzeImage(file: UploadFile = File(...)):
     subscription_key = config['AZURE_VISION_KEY']
     address = config['AZURE_VISION_ADDRESS']
