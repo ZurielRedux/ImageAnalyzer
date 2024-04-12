@@ -33,7 +33,7 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name ${{ env.STORAGE_ACCOUNT }} --source ./dist --destination '$web' 
+            az storage blob upload-batch --account-name ${{ env.STORAGE_ACCOUNT }} --source Frontend/dist --destination '$web' 
     # - name: Purge CDN endpoint
     #   uses: azure/CLI@v1
     #   with:
