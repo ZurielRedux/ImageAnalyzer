@@ -2,10 +2,10 @@
 
 ## Build
 
-To build azure function app
+To build azure function app:\
 `func azure functionapp publish image-analyzer-func-app`
 
-To build front-end
+To build front-end:\
 `npm run build`
 
 ## URLs
