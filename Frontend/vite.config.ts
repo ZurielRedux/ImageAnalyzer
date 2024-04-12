@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
@@ -15,22 +15,11 @@ const defaultConfig = {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
-  if (command === "serve") {
-    const isDev = mode === "development";
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
+  if (command === "serve") {
     return {
       ...defaultConfig,
-      server: {
-        proxy: {
-          "/api": {
-            target: isDev
-              ? "http://127.0.0.1:7071"
-              : "https://image-analyzer-func-app.azurewebsites.net",
-            changeOrigin: isDev,
-            secure: !isDev,
-          },
-        },
-      },
     };
   } else {
     return defaultConfig;

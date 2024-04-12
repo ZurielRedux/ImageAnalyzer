@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const func_app_url = "https://image-analyzer-func-app.azurewebsites.net";
+const isDev = import.meta.env.DEV;
+const func_app_url = isDev
+  ? "http://localhost:7071"
+  : "https://image-analyzer-func-app.azurewebsites.net";
 
 export const processAndAnalyzeImage = async (formData: FormData) => {
   const headers = {
