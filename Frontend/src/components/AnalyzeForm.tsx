@@ -7,6 +7,7 @@ import styles from "@/styles/analyze.module.scss";
 const AnalyzeForm = () => {
   const [form, setForm] = useState<IForm>(initialAnalyzeFormState);
   const [fileUploaded, setFileUploaded] = useState<boolean>(false);
+  const [loadingImageData, setloadingImageData] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null);
   const [imageData, setImageData] = useState<string>("");
 
@@ -34,6 +35,7 @@ const AnalyzeForm = () => {
   };
 
   const onClick = async () => {
+    setloadingImageData(true);
     if (!form.file) {
       return;
     }
@@ -46,6 +48,7 @@ const AnalyzeForm = () => {
       .then((response) => {
         console.log("successfully analyzed", response);
         setImageData(response);
+        setloadingImageData(false);
       })
       .catch((error) => {
         console.error(`Error analyzing and processing image`, error);
@@ -109,7 +112,13 @@ const AnalyzeForm = () => {
         {fileUploaded ? buttonsRow : <></>}
       </form>
 
-      {imageData.length != 0 ? JSON.stringify(imageData) : null}
+      {imageData.length != 0 ? (
+        loadingImageData ? (
+          <>Loading Image Data...</>
+        ) : (
+          JSON.stringify(imageData)
+        )
+      ) : null}
     </div>
   );
 };
