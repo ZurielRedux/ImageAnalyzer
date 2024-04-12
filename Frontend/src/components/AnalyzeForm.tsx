@@ -1,14 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { IForm } from "@/ts/interfaces/form";
+import { IForm, initialAnalyzeFormState } from "@/ts/interfaces/form";
 import * as API from "@/util/api";
 
-const initialFormState: IForm = {
-  file: new File([], ""), // Empty File object
-  tags: [], // Empty array for tags
-};
-
 const AnalyzeForm = () => {
-  const [form, setForm] = useState<IForm>(initialFormState);
+  const [form, setForm] = useState<IForm>(initialAnalyzeFormState);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
