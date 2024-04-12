@@ -40,31 +40,6 @@ export const analyzeImage = async (formData: FormData) => {
   });
 };
 
-export const testImageRoute = async () => {
-  const headers = {
-    "Content-Type": "application/json",
-    accept: "application/json",
-  };
-  const payload = { message: "hello" };
-
-  try {
-    const response = await fetch(`${func_app_url}/api/v1/process/test`, {
-      method: "PUT",
-      headers: headers,
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("There was a problem with the fetch operation:", error);
-    throw error;
-  }
-};
-
 export const getUsers = async () => {
   return await axios.get(`${func_app_url}/api/v1/users/listAll`);
 };

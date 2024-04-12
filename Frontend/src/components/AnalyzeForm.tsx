@@ -43,10 +43,10 @@ const AnalyzeForm = () => {
 
     await API.analyzeImage(formData)
       .then((response) => {
-        console.log("successfully processed and analyzed", response);
+        console.log("successfully analyzed", response);
       })
       .catch((error) => {
-        console.error(`Error processing image`, error);
+        console.error(`Error analyzing and processing image`, error);
       });
   };
 
@@ -57,16 +57,11 @@ const AnalyzeForm = () => {
       return;
     }
     const selectedFile = target.files[0];
-    console.log(selectedFile, "selected file");
-    // setFile(selectedFile);
+
     setForm((prevForm) => ({
       ...prevForm,
       file: selectedFile,
     }));
-  };
-
-  const getUsers = async () => {
-    return await API.getUsers();
   };
 
   return (
@@ -88,9 +83,6 @@ const AnalyzeForm = () => {
       </form>
       <button onClick={onClick} type="submit">
         analyze image
-      </button>
-      <button onClick={getUsers} type="submit">
-        get users route
       </button>
     </div>
   );
