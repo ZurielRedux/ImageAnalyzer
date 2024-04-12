@@ -12,13 +12,11 @@ export const processAndAnalyzeImage = async (formData: FormData) => {
 
   try {
     const response = await axios.put(
-      `${func_app_url}/api/v1/process/file`,
+      `${func_app_url}/api/v1/process/analyze`,
       formData,
-      {
-        headers,
-      }
+      { headers }
     );
-    console.log("Response data:", response.data); // Logging the response data
+    console.log(response, "response data");
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -26,7 +24,6 @@ export const processAndAnalyzeImage = async (formData: FormData) => {
     } else {
       console.error("Unexpected error:", error);
     }
-    throw error; // Rethrow the error to handle it further up the call stack or inform the user
   }
 };
 
@@ -38,10 +35,6 @@ export const analyzeImage = async (formData: FormData) => {
   return await axios.put(`${func_app_url}/api/v1/process/analyze`, formData, {
     headers,
   });
-};
-
-export const getUsers = async () => {
-  return await axios.get(`${func_app_url}/api/v1/users/listAll`);
 };
 
 // export const createUser = async (payload) => {
