@@ -15,16 +15,15 @@
       line-height: normal;
     }
   }
-
   .analyze-form-container {
-    width: 100%;
-    height: inherit;
+    width: inherit;
+    height: auto;
     margin: $spacingLarge;
     display: flex;
-    flex-grow: 1;
 
     .form-container {
       display: flex;
+      height: inherit;
       flex-direction: column;
 
       input[type="file"] {
@@ -36,7 +35,6 @@
       }
 
       .file-input-upload-btn {
-        display: flex;
         border: 1px solid black;
         cursor: pointer;
         padding: $spacingCompact;

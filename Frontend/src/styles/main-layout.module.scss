@@ -7,13 +7,12 @@
   flex-direction: row;
   overflow-y: none;
   box-sizing: border-box;
-  background-color: $primary-light-bg-color;
   color: black;
   scrollbar-gutter: stable both-edges;
+  background-color: $secondary-light-bg-color;
 
   .outlet-component-container {
     width: 90%;
     height: inherit;
-    background-color: $secondary-light-bg-color;
   }
 }

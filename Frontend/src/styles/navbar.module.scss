@@ -10,14 +10,23 @@
   border-right: 1px solid $primary-grey-color;
   padding: 0 1em;
   color: black;
+  font-size: 18px;
 
   .logo-item {
     color: inherit;
     display: block;
     text-decoration: none;
     padding: 24px 0;
-    // margin-bottom: 12px;
     border-bottom: 1px solid $lighter-grey-color;
+
+    span {
+      display: inline-block;
+      transition: font-weight 0.3s ease;
+    }
+
+    &:hover span {
+      font-weight: bold;
+    }
   }
 
   .navbar-links {
@@ -31,7 +40,6 @@
       flex-direction: column;
       justify-content: flex-start;
       gap: $spacingNormal;
-      font-size: 18px;
 
       .li-item {
         display: flex;
