@@ -32,9 +32,14 @@ export const analyzeImage = async (formData: FormData) => {
     accept: "application/json",
   };
 
-  return await axios.put(`${func_app_url}/api/v1/process/analyze`, formData, {
-    headers,
-  });
+  const response = await axios.put(
+    `${func_app_url}/api/v1/process/analyze`,
+    formData,
+    {
+      headers,
+    }
+  );
+  return response.data;
 };
 
 // export const createUser = async (payload) => {

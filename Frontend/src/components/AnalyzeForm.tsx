@@ -8,6 +8,7 @@ const AnalyzeForm = () => {
   const [form, setForm] = useState<IForm>(initialAnalyzeFormState);
   const [fileUploaded, setFileUploaded] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null);
+  const [imageData, setImageData] = useState<string>("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ const AnalyzeForm = () => {
     await API.processAndAnalyzeImage(formData)
       .then((response) => {
         console.log("successfully processed and analyzed", response);
+        setImageData(response);
       })
       .catch((error) => {
         console.error(`Error processing image`, error);
@@ -43,6 +45,7 @@ const AnalyzeForm = () => {
     await API.analyzeImage(formData)
       .then((response) => {
         console.log("successfully analyzed", response);
+        setImageData(response);
       })
       .catch((error) => {
         console.error(`Error analyzing and processing image`, error);
@@ -67,9 +70,9 @@ const AnalyzeForm = () => {
 
   const buttonsRow = (
     <div className={styles["btns-row"]}>
-      <button className={styles["upload-btn"]} type="submit">
+      {/* <button className={styles["upload-btn"]} type="submit">
         upload image
-      </button>
+      </button> */}
       <button onClick={onClick} type="submit">
         analyze image
       </button>
@@ -105,6 +108,8 @@ const AnalyzeForm = () => {
         </div>
         {fileUploaded ? buttonsRow : <></>}
       </form>
+
+      {imageData.length != 0 ? JSON.stringify(imageData) : null}
     </div>
   );
 };
