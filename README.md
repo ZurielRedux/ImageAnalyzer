@@ -6,12 +6,14 @@ To build azure function app:\
 `func azure functionapp publish image-analyzer-func-app`
 
 To build front-end:\
-`npm run build`
+`cd Frontend => npm run build`
 
 ## URLs
 
-Azure Static Website Blob:
+Azure Static Website:\
 https://imageanalyzerblob.z13.web.core.windows.net/
 
-Azure Function App Url:
+Azure Function App Url:\
 https://image-analyzer-func-app.azurewebsites.net/
+
+Built with Typescript and Python, all hosted on Azure Microsoft services.
