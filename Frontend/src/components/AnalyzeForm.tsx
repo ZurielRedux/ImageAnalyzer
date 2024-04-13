@@ -111,14 +111,13 @@ const AnalyzeForm = () => {
         </div>
         {fileUploaded ? buttonsRow : <></>}
       </form>
-
-      {imageData.length != 0 ? (
-        loadingImageData ? (
-          <>Loading Image Data...</>
-        ) : (
-          JSON.stringify(imageData)
-        )
-      ) : null}
+      {loadingImageData ? (
+        <>Loading Image Data...</>
+      ) : imageData.length !== 0 ? (
+        JSON.stringify(imageData)
+      ) : (
+        "No image data available"
+      )}
     </div>
   );
 };
