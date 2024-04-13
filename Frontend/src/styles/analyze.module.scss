@@ -16,9 +16,10 @@
     }
   }
   .analyze-form-container {
+    box-sizing: border-box;
     width: inherit;
     height: auto;
-    margin: $spacingLarge;
+    padding: $spacingLarge;
     display: flex;
     flex-direction: column;
 
@@ -33,6 +34,8 @@
 
       .file-input-container {
         display: flex;
+        width: auto;
+        overflow-x: hidden;
       }
 
       .file-input-upload-btn {

@@ -16,3 +16,11 @@
     height: inherit;
   }
 }
+
+@media screen and (max-width: 932px) {
+  .main-layout-container {
+    .outlet-component-container {
+      width: 100%;
+    }
+  }
+}

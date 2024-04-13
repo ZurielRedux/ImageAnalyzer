@@ -88,13 +88,11 @@ const AnalyzeForm = () => {
         onSubmit={handleSubmit}
         id="uploadForm"
         encType="multipart/form-data"
-        className={styles["form-container"]}
-      >
+        className={styles["form-container"]}>
         <div className={styles["file-input-container"]}>
           <label
             className={styles["file-input-upload-btn"]}
-            htmlFor="fileInput"
-          >
+            htmlFor="fileInput">
             Choose an image
           </label>
           <input

@@ -68,3 +68,9 @@
     }
   }
 }
+
+@media screen and (max-width: 932px) {
+  .navbar-container {
+    display: none;
+  }
+}

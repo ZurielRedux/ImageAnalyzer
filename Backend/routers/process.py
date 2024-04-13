@@ -57,4 +57,5 @@ async def analyzeImage(file: UploadFile = File(...)):
                 response.raise_for_status()
     
             print(f'API responded with: {results}')
+            await session.close()
             return JSONResponse(status_code=status.HTTP_200_OK, content={"message": "File Analyzed", "Results": results})
