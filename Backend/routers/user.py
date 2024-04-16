@@ -12,11 +12,11 @@ async def list_users(req: Request):
     users = [user async for user in req.app.user_items_container.read_all_items()]
     return users
 
-@user_router.get("/test/listAll", response_description="List of all Users", response_model=List[UserModel.User])
-async def list_users(req: Request):
-    print("/test/listAll route")
-    users = [user async for user in req.app.user_items_container.read_all_items()]
-    return JSONResponse(status_code=status.HTTP_200_OK, content=users)
+# @user_router.get("/test/listAll", response_description="List of all Users", response_model=List[UserModel.User])
+# async def list_users(req: Request):
+#     print("/test/listAll route")
+#     users = [user async for user in req.app.user_items_container.read_all_items()]
+#     return JSONResponse(status_code=status.HTTP_200_OK, content=users)
 
 @user_router.post("/create", response_model=UserModel.User)
 async def create_user(req: Request, user: UserModel.User, response_model=UserModel.User):

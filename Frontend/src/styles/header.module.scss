@@ -5,9 +5,35 @@
   padding: 24px $spacingLarge;
   border-bottom: 1px solid $primary-grey-color;
   background-color: $primary-light-bg-color;
+  display: flex;
+  flex-direction: column;
+
+  .hamburger-menu {
+    display: none;
+  }
 
   p {
     font-size: 14px;
     line-height: normal;
+  }
+
+  .title-row {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 932px) {
+  .header-container {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 1em;
+
+    .hamburger-menu {
+      display: block;
+    }
+
+    .title-row {
+      gap: 1em;
+    }
   }
 }
