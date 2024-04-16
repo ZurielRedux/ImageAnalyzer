@@ -42,6 +42,13 @@ export const analyzeImage = async (formData: FormData) => {
   return response.data;
 };
 
+export const getAllUsers = async () => {
+  const response = await axios.get(
+    `https://image-analyzer-func-app.azurewebsites.net/api/v1/users/listAll`
+  );
+  return response.data;
+};
+
 // export const createUser = async (payload) => {
 //   await axios.post(`/api/v1/users/create`, { payload });
 // };

@@ -56,6 +56,14 @@ const AnalyzeForm = () => {
       });
   };
 
+  const onClickGetAllUsers = async (e: FormEvent) => {
+    e.preventDefault();
+
+    await API.getAllUsers().then((response) => {
+      console.log(response);
+    });
+  };
+
   const handleFileChange = (e: ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     if (!target.files) {
@@ -79,6 +87,9 @@ const AnalyzeForm = () => {
       </button> */}
       <button onClick={onClick} type="submit">
         analyze image
+      </button>
+      <button onClick={onClickGetAllUsers} type="submit">
+        get all users
       </button>
     </div>
   );
