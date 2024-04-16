@@ -4,17 +4,6 @@
   width: 100%;
   height: 100%;
 
-  .analyze-header {
-    box-sizing: border-box;
-    padding: 24px $spacingLarge;
-    border-bottom: 1px solid $primary-grey-color;
-    background-color: $primary-light-bg-color;
-
-    p {
-      font-size: 14px;
-      line-height: normal;
-    }
-  }
   .analyze-form-container {
     box-sizing: border-box;
     width: inherit;

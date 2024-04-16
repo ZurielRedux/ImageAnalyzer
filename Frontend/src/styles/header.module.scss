@@ -1,0 +1,13 @@
+@import "./theme.scss";
+
+.header-container {
+  box-sizing: border-box;
+  padding: 24px $spacingLarge;
+  border-bottom: 1px solid $primary-grey-color;
+  background-color: $primary-light-bg-color;
+
+  p {
+    font-size: 14px;
+    line-height: normal;
+  }
+}

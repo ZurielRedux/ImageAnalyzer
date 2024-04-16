@@ -34,7 +34,8 @@ const AnalyzeForm = () => {
       });
   };
 
-  const onClick = async () => {
+  const onClick = async (e: FormEvent) => {
+    e.preventDefault();
     setloadingImageData(true);
     if (!form.file) {
       return;
