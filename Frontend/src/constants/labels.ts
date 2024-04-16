@@ -18,18 +18,23 @@ export const navbarLinks: INavbarLinks = [
     title: "Analyze",
   },
   {
-    url: "/collection",
-    title: "Collection",
+    url: "/collections",
+    title: "Collections",
   },
 ];
 
 export const AnalyzeHeaderInfo: IHeaderInfo = {
   title: "Analyze Image",
   description:
-    "Upload your image to view various visual stats and features like categories, colors, objects, and information tags",
+    "Upload an image to view various visual stats and features such as categories, colors, objects, and information tags",
 };
 
 export const DashboardHeaderInfo: IHeaderInfo = {
   title: "Dashboard",
   description: "",
+};
+
+export const CollectionsHeaderInfo: IHeaderInfo = {
+  title: "Collections",
+  description: "View, and group your Collections of analyzed image data",
 };

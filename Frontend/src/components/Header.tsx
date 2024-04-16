@@ -2,7 +2,7 @@ import styles from "@/styles/header.module.scss";
 
 interface IHeader {
   title: string;
-  description: string;
+  description?: string;
 }
 
 const Header = ({ title, description }: IHeader) => {

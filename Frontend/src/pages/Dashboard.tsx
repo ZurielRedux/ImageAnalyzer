@@ -1,5 +1,12 @@
+import Header from "@/components/Header";
+import { DashboardHeaderInfo } from "@/constants/labels";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <Header title={DashboardHeaderInfo.title} />
+    </div>
+  );
 };
 
 export default Dashboard;
