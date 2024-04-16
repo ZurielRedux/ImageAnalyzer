@@ -49,6 +49,10 @@ const Header = ({ title, description }: IHeader) => {
           color="primary"
           size="small"
           className={styles["hamburger-menu"]}
+          sx={{
+            backgroundColor: "transparent",
+            borderRadius: 0,
+          }}
           onClick={toggleMenu(true)}>
           <FaBars />
         </IconButton>
