@@ -13,7 +13,12 @@ export const NavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
       <NavlinkBase
         ref={ref}
         {...props}
-        className={styles["navlink-base-container"]}>
+        // className={styles["navlink-base-container"]}
+        className={({ isActive }) =>
+          `${styles["navlink-base-container"]} ${
+            isActive ? `${styles["active"]}` : ""
+          }`
+        }>
         {props.children}
       </NavlinkBase>
     );

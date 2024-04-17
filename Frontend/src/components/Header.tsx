@@ -25,7 +25,11 @@ const Header = ({ title, description }: IHeader) => {
       <List>
         {navbarLinks.map((link) => {
           return (
-            <ListItem key={link.url} component="div" divider={true}>
+            <ListItem
+              className={"list-item-container"}
+              key={link.url}
+              component="div"
+              divider={true}>
               <NavLink to={link.url}>
                 <ListItemText primary={link.title} />
               </NavLink>
@@ -47,7 +51,7 @@ const Header = ({ title, description }: IHeader) => {
       <div className={styles["title-row"]}>
         <IconButton
           color="primary"
-          size="small"
+          size="medium"
           className={styles["hamburger-menu"]}
           sx={{
             backgroundColor: "transparent",

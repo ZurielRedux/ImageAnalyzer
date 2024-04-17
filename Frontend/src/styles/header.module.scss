@@ -28,14 +28,15 @@
     flex-direction: column;
     padding: 14px 1em;
 
+    .list-item-container {
+    }
+
     .hamburger-menu {
-      display: block;
+      display: flex;
     }
 
     .title-row {
       gap: 1em;
-      display: flex;
-      align-items: center;
     }
   }
 }

@@ -1,7 +1,9 @@
 .navlink-base-container {
+  width: 100%;
   text-decoration: none;
-}
 
-.active {
-  text-decoration: none;
+  &.active span {
+    font-weight: bold;
+    text-decoration: underline;
+  }
 }
