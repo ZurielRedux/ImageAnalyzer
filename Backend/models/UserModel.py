@@ -7,6 +7,8 @@ class User(BaseModel):
     id : Annotated[str, Field(default_factory=lambda: uuid4().hex)]
     username : str
     email : EmailStr
+    first_name: str | None = None
+    last_name: str | None = None
     created_at: datetime = Field(default_factory=datetime.now)
 
     @field_validator('username')
@@ -16,3 +18,6 @@ class User(BaseModel):
             is_alphanumberic = username.replace(' ', '').isalnum()
             assert is_alphanumberic, f'{info.field_name} must be alphanumeric'
         return username
+    
+class UserInDB(User):
+    hashed_password: str
