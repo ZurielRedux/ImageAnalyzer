@@ -39,7 +39,7 @@ async def uploadToAzure(file: UploadFile, container_name: str):
 async def analyzeImage(file: UploadFile = File(...)):
     subscription_key = config['AZURE_VISION_KEY']
     address = config['AZURE_VISION_ADDRESS']
-    parameters = {'visualFeatures': 'Categories,Description,Color,Objects,Faces', 'language': 'en'}
+    parameters = {'visualFeatures': 'Categories,Adult,Tags,Description,Faces,Color,ImageType,Objects,Brands', 'language': 'en'}
 
     print("process_router /analyze route")
     
