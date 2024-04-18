@@ -9,8 +9,7 @@ const Navbar = () => {
       <li className={styles["li-item"]} key={link.url}>
         <NavLink
           to={link.url}
-          className={({ isActive }) => (isActive ? styles["active"] : "")}
-        >
+          className={({ isActive }) => (isActive ? styles["active"] : "")}>
           {link.title}
         </NavLink>
       </li>
@@ -19,9 +18,12 @@ const Navbar = () => {
 
   return (
     <div className={styles["navbar-container"]}>
-      <NavLink className={styles["logo-item"]} to={"/"}>
-        <span>Imjür Analyzer</span>
-      </NavLink>
+      <div className={styles["title-row"]}>
+        <img src="/imjur_logo_transparent.png" />
+        <NavLink className={styles["title"]} to={"/"}>
+          <span>Imjür Analyzer</span>
+        </NavLink>
+      </div>
       <nav className={styles["navbar-links"]}>
         <ul>{navbarList}</ul>
       </nav>

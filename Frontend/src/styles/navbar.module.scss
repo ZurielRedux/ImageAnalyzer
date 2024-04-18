@@ -10,23 +10,35 @@
   border-right: 1px solid $primary-grey-color;
   padding: 0 14px;
   color: black;
-  font-size: 18px;
+  font-size: 20px;
 
-  .logo-item {
-    color: inherit;
-    display: block;
-    text-decoration: none;
-    padding: 24px 0;
-    border-bottom: 1px solid $lighter-grey-color;
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: $spacingSmall;
 
-    span {
-      display: inline-block;
-      transition: font-weight 0.3s ease;
+    img {
+      width: 30px;
+      height: auto;
     }
 
-    &:hover span {
-      font-weight: bold;
-      cursor: pointer;
+    .title {
+      color: inherit;
+      display: block;
+      text-decoration: none;
+      padding: 24px 0;
+      border-bottom: 1px solid $lighter-grey-color;
+
+      span {
+        display: inline-block;
+        transition: font-weight 0.3s ease;
+        line-height: normal;
+      }
+
+      &:hover span {
+        font-weight: bold;
+        cursor: pointer;
+      }
     }
   }
 
