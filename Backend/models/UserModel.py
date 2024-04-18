@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field, ValidationError, field_validator, Validat
 from uuid import uuid4
 from typing import Optional, Annotated
 from datetime import datetime
+from .CollectionsModel import Collections as CollectionsClass
 
 class User(BaseModel):
     id : Annotated[str, Field(default_factory=lambda: uuid4().hex)]
@@ -10,6 +11,7 @@ class User(BaseModel):
     first_name: str | None = None
     last_name: str | None = None
     created_at: datetime = Field(default_factory=datetime.now)
+    Collections: CollectionsClass = Field(default_factory=CollectionsClass)
 
     @field_validator('username')
     @classmethod
