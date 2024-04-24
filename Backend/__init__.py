@@ -7,6 +7,7 @@ from azure.cosmos import PartitionKey, exceptions
 from .routers.user import user_router
 from .routers.process import process_router
 
+
 config = dotenv_values(".env")
 app = FastAPI(
     root_path="/api/v1"
