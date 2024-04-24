@@ -1,5 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { IForm, initialAnalyzeFormState } from "@/ts/interfaces/form";
+import { CustomSnackbar } from "@/components/CustomSnackbar";
+import { Severity } from "@/ts/interfaces/analysis";
+import useSnackbar from "@/hooks/useSnackbar";
 import * as API from "@/util/api";
 
 import styles from "@/styles/analyze.module.scss";
@@ -10,6 +13,7 @@ const AnalyzeForm = () => {
   const [loadingImageData, setloadingImageData] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null);
   const [imageData, setImageData] = useState<string>("");
+  const { open, severity, message, showSnackbar, hideSnackbar } = useSnackbar();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -34,6 +38,13 @@ const AnalyzeForm = () => {
       });
   };
 
+  const resetState = () => {
+    setFileUploaded(false);
+    setForm(initialAnalyzeFormState);
+    setImage(null);
+    setImageData("");
+  };
+
   const onClick = async (e: FormEvent) => {
     e.preventDefault();
     setloadingImageData(true);
@@ -56,23 +67,22 @@ const AnalyzeForm = () => {
       });
   };
 
-  const onClickGetAllUsers = async (e: FormEvent) => {
-    e.preventDefault();
-
-    await API.getAllUsers().then((response) => {
-      console.log(response);
-    });
-  };
-
   const handleFileChange = (e: ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     if (!target.files) {
       alert("Error selecting image");
       return;
     }
-    const selectedFile = target.files[0];
-    setImage(URL.createObjectURL(target.files[0]));
 
+    const selectedFile = target.files[0];
+    if (target.files[0].size > 4194304) {
+      showSnackbar(Severity.Error, "Error: File Size too large.");
+      target.value = "";
+      resetState();
+      return;
+    }
+    showSnackbar(Severity.Success, "Success: File successfully uploaded.");
+    setImage(URL.createObjectURL(target.files[0]));
     setForm((prevForm) => ({
       ...prevForm,
       file: selectedFile,
@@ -87,9 +97,6 @@ const AnalyzeForm = () => {
       </button> */}
       <button onClick={onClick} type="submit">
         analyze image
-      </button>
-      <button onClick={onClickGetAllUsers} type="submit">
-        get all users
       </button>
     </div>
   );
@@ -128,6 +135,13 @@ const AnalyzeForm = () => {
       ) : (
         "No image data available"
       )}
+      <CustomSnackbar
+        open={open}
+        severity={severity}
+        message={message}
+        onClose={hideSnackbar}
+        autoHideDuration={5000}
+      />
     </div>
   );
 };
